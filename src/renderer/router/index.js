@@ -1,13 +1,13 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 
 // in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
 // detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
 
-Vue.use(Router)
+Vue.use(Router);
 
 /* Layout */
-import Layout from '../views/layout/Layout'
+import Layout from '../views/layout/Layout';
 
 /**
 * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
@@ -31,10 +31,12 @@ export const constantRouterMap = [
     redirect: '/dashboard',
     name: 'Dashboard',
     hidden: true,
-    children: [{
-      path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
-    }]
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index')
+      }
+    ]
   },
 
   {
@@ -64,7 +66,7 @@ export const constantRouterMap = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: '',
         name: 'Form',
         component: () => import('@/views/form/index'),
         meta: { title: 'Form', icon: 'form' }
@@ -72,12 +74,50 @@ export const constantRouterMap = [
     ]
   },
 
+  {
+    path: '/notifications',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'Notifications',
+        component: () => import('@/views/notifications/index'),
+        meta: { title: '公告', icon: 'notifications' }
+      }
+    ]
+  },
+
+  {
+    path: '/activities',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'Activites',
+        component: () => import('@/views/activites/index'),
+        meta: { title: '活动', icon: 'activites' }
+      }
+    ]
+  },
+
+  {
+    path: '/commit',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'Commit',
+        component: () => import('@/views/commit/index'),
+        meta: { title: '提交', icon: 'commit' }
+      }
+    ]
+  },
+
   { path: '*', redirect: '/404', hidden: true }
-]
+];
 
 export default new Router({
   // mode: 'history', //后端支持可开
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
-})
-
+});
