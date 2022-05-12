@@ -28,6 +28,7 @@
           :on-remove="uploadRemove"
           :on-exceed="uploadExceed"
           :http-request="commitFile"
+          style="width: 360px; margin: 0 auto"
         >
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">
