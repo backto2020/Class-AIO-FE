@@ -113,6 +113,40 @@ export const constantRouterMap = [
     ]
   },
 
+  {
+    path: '/admin',
+    name: 'Admin',
+    hidden: true,
+    meta: { title: '管理', icon: 'admin' },
+    component: Layout,
+    children: [
+      {
+        path: 'activities',
+        name: 'ActivitiesAdmin',
+        component: () => import('@/views/admin/activities'),
+        meta: { title: '活动管理', icon: 'activities-admin' }
+      },
+      {
+        path: 'notifications',
+        name: 'NotificationsAdmin',
+        component: () => import('@/views/admin/notifications'),
+        meta: { title: '公告管理', icon: 'notifications-admin' }
+      },
+      {
+        path: 'commit',
+        name: 'CommitAdmin',
+        component: () => import('@/views/admin/commit'),
+        meta: { title: '提交管理', icon: 'notifications-admin' }
+      },
+      {
+        path: 'users',
+        name: 'UsersAdmin',
+        component: () => import('@/views/admin/users'),
+        meta: { title: '用户管理', icon: 'users-admin' }
+      }
+    ]
+  },
+
   { path: '*', redirect: '/404', hidden: true }
 ];
 
