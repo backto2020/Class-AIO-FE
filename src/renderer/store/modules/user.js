@@ -25,6 +25,9 @@ const user = {
     },
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
+    },
+    SET_ADMIN: (state, admin) => {
+      state.admin = admin
     }
   },
 
@@ -53,6 +56,7 @@ const user = {
           commit('SET_UID', data.id)
           commit('SET_USERNAME', data.username)
           commit('SET_AVATAR', data.avatar)
+          commit('SET_ADMIN', data.admin)
           resolve(response)
         }).catch(error => {
           reject(error)
