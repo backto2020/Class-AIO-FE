@@ -1,16 +1,59 @@
 <template>
   <el-card class="dashboard-container">
     <div class="dashboard-text">姓名：{{ name }}</div>
+    <course-table :usualCourses="courseList" :width="800" :height="600" />
   </el-card>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import CourseTable from './components/CourseTable.vue';
 
 export default {
   name: 'dashboard',
+  components: { CourseTable },
   computed: {
     ...mapGetters(['name', 'uid', 'username'])
+  },
+  data() {
+    return {
+      courseList: []
+    };
+  },
+  created() {
+    this.courseList = [
+      {
+        day: 3,
+        week: '周三',
+        teacher: '张三',
+        period: 7,
+        length: 2,
+        name: '数据结构',
+        room: '4-201'
+      },
+      {
+        day: 1,
+        period: 1,
+        length: 2,
+        name: '大学物理',
+        room: '4-201'
+      },
+      {
+        day: 2,
+        period: 7,
+        length: 2,
+        name: '程序设计',
+        room: '4-201'
+      },
+      {
+        day: 4,
+        week: '周四',
+        period: 5,
+        length: 4,
+        name: '交通实验',
+        room: '理西201'
+      }
+    ];
   }
 };
 </script>
