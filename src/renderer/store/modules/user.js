@@ -5,7 +5,7 @@ const user = {
   state: {
     token: getToken(),
     name: '',
-    uid: -1,
+    sid: -1,
     username: '',
     avatar: ''
   },
@@ -17,8 +17,8 @@ const user = {
     SET_NAME: (state, name) => {
       state.name = name
     },
-    SET_UID: (state, uid) => {
-      state.uid = uid
+    SET_SID: (state, sid) => {
+      state.sid = sid
     },
     SET_USERNAME: (state, username) => {
       state.username = username
@@ -53,7 +53,7 @@ const user = {
         getInfo(state.token).then(response => {
           const data = response.data
           commit('SET_NAME', data.name)
-          commit('SET_UID', data.id)
+          commit('SET_SID', data.sid)
           commit('SET_USERNAME', data.username)
           commit('SET_AVATAR', data.avatar)
           commit('SET_ADMIN', data.admin)

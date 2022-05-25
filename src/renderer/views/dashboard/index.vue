@@ -1,6 +1,8 @@
 <template>
   <el-card class="dashboard-container">
     <div class="dashboard-text">姓名：{{ name }}</div>
+    <div class="dashboard-text">学号：{{ sid }}</div>
+    <div class="dashboard-text">用户名：{{ username }}</div>
     <course-table :usualCourses="courseList" :width="800" :height="600" />
   </el-card>
 </template>
@@ -13,7 +15,7 @@ export default {
   name: 'dashboard',
   components: { CourseTable },
   computed: {
-    ...mapGetters(['name', 'uid', 'username'])
+    ...mapGetters(['name', 'sid', 'username'])
   },
   data() {
     return {
