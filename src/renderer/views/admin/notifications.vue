@@ -84,7 +84,7 @@ export default {
       this.dialogVisible = true;
     },
     handleDeleteBtn(row) {
-      deleteNoti(row.sid)
+      deleteNoti(row.id)
         .then(res => {
           this.initNotiList();
           this.$alert(res.message, '', {
