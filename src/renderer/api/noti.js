@@ -7,11 +7,11 @@ export function deleteNoti(id) {
   });
 }
 
-export function editNoti(user) {
+export function editNoti(noti) {
   return request({
     url: '/noti',
     method: 'post',
-    data: user
+    data: noti
   });
 }
 
