@@ -36,3 +36,10 @@ export function loginActi(id) {
     method: 'put'
   });
 }
+
+export function getActiLoginStatus(id) {
+  return request({
+    url: `acti/login/${id}`,
+    method: 'get'
+  });
+}

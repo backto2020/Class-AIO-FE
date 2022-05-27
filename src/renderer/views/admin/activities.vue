@@ -1,5 +1,6 @@
 <template>
   <div style="margin: 20px;">
+    <!-- 活动表管理 -->
     <el-table :data="actiList" border style="width: 100%">
       <el-table-column fixed sortable prop="id" label="ID" />
       <el-table-column sortable sort-by="begin" label="开始时间">
@@ -14,10 +15,16 @@
       </el-table-column>
       <el-table-column prop="type" label="类型" />
       <el-table-column prop="title" label="标题" />
-      <!-- <el-table-column prop="content" label="正文" width="400"/> -->
-      <el-table-column label="需要签到">
+      <el-table-column label="签到情况">
         <template slot-scope="scope">
-          {{ scope.row.login === 1 ? '需要签到' : '无需签到' }}
+          <el-button
+            :disabled="scope.row.login != 1"
+            @click="handleCheckLoginBtn(scope.row.id)"
+            type="text"
+            size="small"
+          >
+            {{ scope.row.login === 1 ? '查看签到情况' : '无需签到' }}
+          </el-button>
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
@@ -27,6 +34,8 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <!-- 新活动或修改活动表单 -->
     <el-dialog title="活动详情" :visible.sync="dialogVisible">
       <el-form :model="selectedActi">
         <el-form-item label="开始时间" :label-width="formLabelWidth">
@@ -57,6 +66,26 @@
         <el-button type="primary" @click="handleCommitBtn">确 定</el-button>
       </div>
     </el-dialog>
+
+    <!-- 签到情况表 -->
+    <el-dialog v-if="loginStatus != null" title="签到情况" :visible.sync="loginStatusVisible">
+      <h3>未签到：</h3>
+      <el-table :data="loginStatus.unlogin">
+        <el-table-column sortable property="sid" label="学号" />
+        <el-table-column property="name" label="姓名" />
+      </el-table>
+      <h3>已签到：</h3>
+      <el-table :data="loginStatus.logined">
+        <el-table-column sortable property="sid" label="学号" />
+        <el-table-column property="name" label="姓名" />
+        <el-table-column sortable sort-by="time" label="签到时间">
+          <template slot-scope="scope">
+            {{ scope.row.time.slice(0, 19).replace('T', ' ') }}
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-dialog>
+
     <el-button
       v-if="!dialogVisible"
       type="primary"
@@ -69,7 +98,7 @@
 </template>
 
 <script>
-import { getActiList, newActi, editActi, deleteActi } from '@/api/acti';
+import { getActiList, newActi, editActi, deleteActi, getActiLoginStatus } from '@/api/acti';
 
 export default {
   data() {
@@ -87,6 +116,8 @@ export default {
         login: 0
       },
       dialogVisible: false,
+      loginStatusVisible: false,
+      loginStatus: null,
       formLabelWidth: '120px'
     };
   },
@@ -96,10 +127,17 @@ export default {
         this.actiList = res.data.map(x => {
           return {
             ...x,
+            login: x.login === 1 || x.login === 2 ? 1 : 0,
             begin: new Date(x.begin).toISOString(),
             end: new Date(x.end).toISOString()
           };
         });
+      });
+    },
+    handleCheckLoginBtn(id) {
+      getActiLoginStatus(id).then(res => {
+        this.loginStatus = res.data;
+        this.loginStatusVisible = true;
       });
     },
     handleEditBtn(row) {
