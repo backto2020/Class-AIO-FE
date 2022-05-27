@@ -29,3 +29,10 @@ export function newActi(newActi) {
     data: newActi
   });
 }
+
+export function loginActi(id) {
+  return request({
+    url: `/acti/login/${id}`,
+    method: 'put'
+  });
+}

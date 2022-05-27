@@ -5,6 +5,7 @@
         <span>{{ info.title }}</span>
         <el-button
           v-if="info.login == 1 || info.login == 2"
+          @click="login(info.id)"
           :disabled="info.begin > new Date() || new Date() > info.end || info.login == 2"
           style="float: right; padding: 3px 0"
           type="text"
@@ -24,7 +25,7 @@
   </div>
 </template>
 <script>
-import { getActiList } from '../../api/acti';
+import { getActiList, loginActi } from '../../api/acti';
 import t2s from '../../utils/t2s';
 export default {
   data() {
@@ -33,18 +34,34 @@ export default {
     };
   },
   methods: {
-    t2s
+    t2s,
+    initActiList() {
+      getActiList().then(res => {
+        this.activity_list = res.data.map(x => {
+          return {
+            ...x,
+            begin: new Date(x.begin),
+            end: new Date(x.end)
+          };
+        });
+      });
+    },
+    login(id) {
+      loginActi(id)
+        .then(res => {
+          this.initActiList();
+          this.$alert(res.message, '', {
+            confirmButtonText: '确定',
+            type: 'success'
+          });
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
   },
   created() {
-    getActiList().then(res => {
-      this.activity_list = res.data.map(x => {
-        return {
-          ...x,
-          begin: new Date(x.begin),
-          end: new Date(x.end)
-        };
-      });
-    });
+    this.initActiList();
   }
 };
 </script>
