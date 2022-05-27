@@ -2,7 +2,11 @@
   <div style="margin: 20px;">
     <el-table :data="notiList" border style="width: 100%">
       <el-table-column fixed sortable prop="id" label="ID" />
-      <el-table-column sortable prop="time" label="发布时间" width="200" />
+      <el-table-column sortable sort-by="time" label="发布时间" width="200">
+        <template slot-scope="scope">
+          {{ scope.row.time.slice(0, 19).replace('T', ' ') }}
+        </template>
+      </el-table-column>
       <el-table-column prop="type" label="类型" />
       <el-table-column prop="title" label="标题" width="200" />
       <el-table-column prop="content" label="正文" width="600" />
