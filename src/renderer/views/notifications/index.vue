@@ -11,6 +11,7 @@
 </template>
 <script>
 import t2s from '../../utils/t2s';
+import { getNotiList } from '../../api/noti';
 
 export default {
   data() {
@@ -19,22 +20,10 @@ export default {
     };
   },
   created() {
-    // TODO: query
-    this.notification_list = Array(10)
-      .fill(null)
-      .map((x, i) => {
-        return {
-          id: i - 10,
-          title: 'This is a title.',
-          time: new Date().valueOf(),
-          content: 'some content'
-        };
+    getNotiList().then(res => {
+      this.notification_list = res.data.map(x => {
+        return { ...x, timeString: t2s(new Date(x.time)) };
       });
-    this.notification_list = this.notification_list.map(x => {
-      return {
-        ...x,
-        timeString: t2s(new Date(x.time))
-      };
     });
   }
 };
