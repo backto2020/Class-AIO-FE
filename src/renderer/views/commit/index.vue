@@ -4,17 +4,19 @@
       <div slot="header" class="clearfix">
         <span>{{ info.title }}</span>
         <el-button
-          :disabled="info.beginTime > new Date() || new Date() > info.endTime"
+          :disabled="info.begin > new Date() || new Date() > info.end"
           style="float: right; padding: 3px 0"
           type="text"
           @click="chooseItem(info.id)"
         >
           {{
-            info.beginTime <= new Date() && new Date() <= info.endTime ? '提交' : '不在提交时间段'
+            info.begin <= new Date() && new Date() <= info.end ? '提交' : '不在提交时间段'
           }}
         </el-button>
       </div>
-      <div class="commit-time">{{ t2s(info.beginTime) }} - {{ t2s(info.endTime) }}</div>
+      <div v-if="typeof info.begin !== 'undefined'" class="commit-time">
+        {{ t2s(info.begin) }} - {{ t2s(info.end) }}
+      </div>
       <div class="commit-content">{{ info.content }}</div>
       <el-dialog title="提交文件" :visible.sync="dialogFormVisible">
         <el-upload
@@ -50,10 +52,21 @@
 </template>
 <script>
 import t2s from '../../utils/t2s';
-import request from '@/utils/request';
+import { getCommitList, logCommit } from '../../api/commit';
 export default {
   methods: {
     t2s,
+    initCommitList() {
+      getCommitList().then(res => {
+        this.commitList = res.data.map(x => {
+          return {
+            ...x,
+            begin: new Date(x.begin),
+            end: new Date(x.end)
+          };
+        });
+      });
+    },
     chooseItem(id) {
       this.dialogFormVisible = true;
       this.commitId = id;
@@ -104,11 +117,7 @@ export default {
         console.warn(item);
         formData.append(item.name, item.raw);
       });
-      request({
-        url: `/commit/${this.commitId}`,
-        method: 'post',
-        data: formData
-      })
+      logCommit(this.commitId, formData)
         .then(res => {
           console.log(res);
           this.$alert(res.message, { type: 'success' }).then(() => {
@@ -130,25 +139,7 @@ export default {
     };
   },
   created() {
-    console.log('Commit');
-    // TODO: query
-    this.commitList = Array(10)
-      .fill(null)
-      .map((x, i) => {
-        return {
-          id: i - 10,
-          title: 'xx作业/xx截图',
-          beginTime:
-            i % 4
-              ? new Date().valueOf() - 1000 * 60 * 60 * 1
-              : new Date().valueOf() + 1000 * 60 * 60 * 1,
-          endTime:
-            i % 4
-              ? new Date().valueOf() + 1000 * 60 * 60 * 1
-              : new Date().valueOf() + 1000 * 60 * 60 * 2,
-          content: '本周作业。请在指定时间内提交。'
-        };
-      });
+    this.initCommitList();
   }
 };
 </script>
