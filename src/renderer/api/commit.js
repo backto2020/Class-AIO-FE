@@ -30,10 +30,11 @@ export function newCommit(commit) {
   });
 }
 
-export function loginCommit(id) {
+export function logCommit(id, formData) {
   return request({
     url: `/commit/${id}`,
-    method: 'put'
+    method: 'post',
+    data: formData
   });
 }
 
