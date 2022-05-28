@@ -22,11 +22,11 @@ export function getActiList() {
   });
 }
 
-export function newActi(newActi) {
+export function newActi(acti) {
   return request({
     url: '/acti',
     method: 'put',
-    data: newActi
+    data: acti
   });
 }
 
@@ -39,7 +39,7 @@ export function loginActi(id) {
 
 export function getActiLoginStatus(id) {
   return request({
-    url: `acti/login/${id}`,
+    url: `/acti/login/${id}`,
     method: 'get'
   });
 }
