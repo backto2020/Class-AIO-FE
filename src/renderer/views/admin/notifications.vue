@@ -4,7 +4,7 @@
       <el-table-column fixed sortable prop="id" label="ID" />
       <el-table-column sortable sort-by="time" label="发布时间" width="200">
         <template slot-scope="scope">
-          {{ scope.row.time.slice(0, 19).replace('T', ' ') }}
+          {{ t2s(new Date(scope.row.time)) }}
         </template>
       </el-table-column>
       <el-table-column prop="type" label="类型" />
@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import t2s from '../../utils/t2s';
 import { getNotiList, newNoti, editNoti, deleteNoti } from '@/api/noti';
 
 export default {
@@ -74,6 +75,7 @@ export default {
     };
   },
   methods: {
+    t2s,
     initNotiList() {
       getNotiList().then(res => {
         this.notiList = res.data.map(x => {

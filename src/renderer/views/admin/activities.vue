@@ -5,12 +5,12 @@
       <el-table-column fixed sortable prop="id" label="ID" />
       <el-table-column sortable sort-by="begin" label="开始时间">
         <template slot-scope="scope">
-          {{ scope.row.begin.slice(0, 19).replace('T', ' ') }}
+          {{ t2s(new Date(scope.row.begin)) }}
         </template>
       </el-table-column>
       <el-table-column sortable sort-by="end" label="结束时间">
         <template slot-scope="scope">
-          {{ scope.row.end.slice(0, 19).replace('T', ' ') }}
+          {{ t2s(new Date(scope.row.end)) }}
         </template>
       </el-table-column>
       <el-table-column prop="type" label="类型" />
@@ -80,7 +80,7 @@
         <el-table-column property="name" label="姓名" />
         <el-table-column sortable sort-by="time" label="签到时间">
           <template slot-scope="scope">
-            {{ scope.row.time.slice(0, 19).replace('T', ' ') }}
+            {{ t2s(new Date(scope.row.time)) }}
           </template>
         </el-table-column>
       </el-table>
@@ -98,6 +98,7 @@
 </template>
 
 <script>
+import t2s from '../../utils/t2s';
 import { getActiList, newActi, editActi, deleteActi, getActiLoginStatus } from '@/api/acti';
 
 export default {
@@ -122,6 +123,7 @@ export default {
     };
   },
   methods: {
+    t2s,
     initActiList() {
       getActiList().then(res => {
         this.actiList = res.data.map(x => {

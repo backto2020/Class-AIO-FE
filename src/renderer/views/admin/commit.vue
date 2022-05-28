@@ -5,12 +5,12 @@
       <el-table-column fixed sortable prop="id" label="ID" />
       <el-table-column sortable sort-by="begin" label="开始时间">
         <template slot-scope="scope">
-          {{ scope.row.begin.slice(0, 19).replace('T', ' ') }}
+          {{ t2s(new Date(scope.row.begin)) }}
         </template>
       </el-table-column>
       <el-table-column sortable sort-by="end" label="结束时间">
         <template slot-scope="scope">
-          {{ scope.row.end.slice(0, 19).replace('T', ' ') }}
+          {{ t2s(new Date(scope.row.end)) }}
         </template>
       </el-table-column>
       <el-table-column prop="type" label="类型" />
@@ -44,10 +44,8 @@
           <el-date-picker v-model="selectedCommit.end" type="datetime" placeholder="选择日期时间" />
         </el-form-item>
         <el-form-item label="类型" :label-width="formLabelWidth">
-          <el-radio v-model="selectedCommit.type" label="班会提交">班会提交</el-radio>
-          <el-radio v-model="selectedCommit.type" label="班集体提交">班集体提交</el-radio>
-          <el-radio v-model="selectedCommit.type" label="学校长期提交">学校长期提交</el-radio>
-          <el-radio v-model="selectedCommit.type" label="长期大作业">长期大作业</el-radio>
+          <el-radio v-model="selectedCommit.type" label="作业文件">作业文件</el-radio>
+          <el-radio v-model="selectedCommit.type" label="其他文件">其他文件</el-radio>
         </el-form-item>
         <el-form-item label="标题" :label-width="formLabelWidth">
           <el-input v-model="selectedCommit.title" />
@@ -75,7 +73,7 @@
         <el-table-column property="name" label="姓名" />
         <el-table-column sortable sort-by="time" label="最后一次提交时间">
           <template slot-scope="scope">
-            {{ scope.row.time.slice(0, 19).replace('T', ' ') }}
+            {{ t2s(new Date(scope.row.time)) }}
           </template>
         </el-table-column>
       </el-table>
@@ -93,6 +91,7 @@
 </template>
 
 <script>
+import t2s from '../../utils/t2s';
 import { getCommitList, newCommit, editCommit, deleteCommit, getCommitStatus } from '@/api/commit';
 
 export default {
@@ -116,6 +115,7 @@ export default {
     };
   },
   methods: {
+    t2s,
     initCommitList() {
       getCommitList().then(res => {
         this.commitList = res.data.map(x => {
