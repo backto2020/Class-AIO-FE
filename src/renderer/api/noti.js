@@ -10,7 +10,7 @@ export function deleteNoti(id) {
 export function editNoti(noti) {
   return request({
     url: '/noti',
-    method: 'post',
+    method: 'put',
     data: noti
   });
 }
@@ -25,7 +25,7 @@ export function getNotiList() {
 export function newNoti(newNoti) {
   return request({
     url: '/noti',
-    method: 'put',
+    method: 'post',
     data: newNoti
   });
 }

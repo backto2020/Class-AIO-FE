@@ -10,7 +10,7 @@ export function deleteUser(sid) {
 export function editUser(user) {
   return request({
     url: '/user',
-    method: 'post',
+    method: 'put',
     data: user
   });
 }
@@ -25,7 +25,7 @@ export function getUserList() {
 export function newUser(newUser) {
   return request({
     url: '/user',
-    method: 'put',
+    method: 'post',
     data: newUser
   });
 }

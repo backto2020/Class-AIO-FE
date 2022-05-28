@@ -10,7 +10,7 @@ export function deleteActi(id) {
 export function editActi(acti) {
   return request({
     url: '/acti',
-    method: 'post',
+    method: 'put',
     data: acti
   });
 }
@@ -25,7 +25,7 @@ export function getActiList() {
 export function newActi(acti) {
   return request({
     url: '/acti',
-    method: 'put',
+    method: 'post',
     data: acti
   });
 }

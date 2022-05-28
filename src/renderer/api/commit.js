@@ -10,7 +10,7 @@ export function deleteCommit(id) {
 export function editCommit(commit) {
   return request({
     url: '/commit',
-    method: 'post',
+    method: 'put',
     data: commit
   });
 }
@@ -25,7 +25,7 @@ export function getCommitList() {
 export function newCommit(commit) {
   return request({
     url: '/commit',
-    method: 'put',
+    method: 'post',
     data: commit
   });
 }
@@ -33,7 +33,7 @@ export function newCommit(commit) {
 export function logCommit(id, formData) {
   return request({
     url: `/commit/${id}`,
-    method: 'post',
+    method: 'put',
     data: formData
   });
 }
