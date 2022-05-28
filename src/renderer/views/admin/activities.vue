@@ -56,7 +56,7 @@
         <el-form-item label="内容" :label-width="formLabelWidth">
           <el-input v-model="selectedActi.content" />
         </el-form-item>
-        <el-form-item label="类型" :label-width="formLabelWidth">
+        <el-form-item label="是否需要签到" :label-width="formLabelWidth">
           <el-radio v-model="selectedActi.login" :label="1">需要签到</el-radio>
           <el-radio v-model="selectedActi.login" :label="0">无需签到</el-radio>
         </el-form-item>
