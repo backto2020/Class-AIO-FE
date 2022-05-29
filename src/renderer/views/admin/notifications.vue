@@ -126,7 +126,7 @@ export default {
     },
     handleNewBtn() {
       this.mode = 'new';
-      this.selectedNoti = { ...this.emptyNoti };
+      this.selectedNoti = { ...this.emptyNoti, time: new Date() };
       this.dialogVisible = true;
     }
   },
