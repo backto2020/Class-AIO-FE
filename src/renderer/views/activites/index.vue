@@ -2,6 +2,7 @@
   <div>
     <el-card v-for="info in activity_list" :key="info.id" class="acti-card">
       <div slot="header" class="clearfix">
+        <el-tag>{{ info.type }}</el-tag>
         <span>{{ info.title }}</span>
         <el-button
           v-if="info.login == 1 || info.login == 2"

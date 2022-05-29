@@ -2,6 +2,7 @@
   <div>
     <el-card v-for="info in commitList" :key="info.id" class="commit-card">
       <div slot="header" class="clearfix">
+        <el-tag>{{ info.type }}</el-tag>
         <span>{{ info.title }}</span>
         <el-button
           :disabled="info.begin > new Date() || new Date() > info.end"
