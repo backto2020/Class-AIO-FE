@@ -1,8 +1,8 @@
 {
-  "name": "electron-vue-admin",
-  "version": "3.0.0",
-  "author": "Pan <panfree23@gmail.com>",
-  "description": "An electron-vue project",
+  "name": "class-aio-fe",
+  "version": "1.0.0",
+  "author": "backto202 <backto202@foxmail.com>",
+  "description": "Class All in One Frontend",
   "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
@@ -19,8 +19,8 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "electron-vue-admin",
-    "appId": "org.simulatedgreg.electron-vue",
+    "productName": "class-aio",
+    "appId": "org.doubleduck.class-aio",
     "directories": {
       "output": "build"
     },
