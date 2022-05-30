@@ -1,8 +1,10 @@
-# electron-vue-admin
+# Class - All in One (FE)
 
-> An electron-vue project
+本项目为软件工程大作业，意在实现一个班级管理系统，管理员可以创建并管理班级成员账号，可以发布公告、活动、需要提交的任务等。
 
-This is a vue electron admin project base on  [vueAdmin-template](https://github.com/PanJiaChen/vueAdmin-template) , and was generated from [electron-vue](https://github.com/SimulatedGREG/electron-vue) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about this project can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+这个仓库是前端，后端仓库：[Class-AIO-BE](https://github.com/backto2020/Class-AIO-BE)
+
+项目基于 [electron-vue-admin](https://github.com/PanJiaChen/electron-vue-admin/) 模板，可以得到基于 Electron 的应用程序或 Web 页面。由于该模板项目较长时间未维护，经尝试无法兼容最新的 node 版本，我们使用了 v10.8.0 的 node，可以正常运行。
 
 ## Build Setup
 
@@ -22,15 +24,3 @@ npm run lint
 # run webpack in production
 npm run pack
 ```
----
-
-
-## Demo
-
-![](https://github.com/PanJiaChen/PanJiaChen.github.io/blob/master/images/electron-login.png)
-
-![](https://github.com/PanJiaChen/PanJiaChen.github.io/blob/master/images/electron-admin.gif)
-
-
-## Download
-Mac: [app release](https://github.com/PanJiaChen/electron-vue-admin/releases/tag/v3.0.0)
