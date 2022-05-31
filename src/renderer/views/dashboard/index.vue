@@ -11,6 +11,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import CourseTable from './components/CourseTable.vue';
+import { getAllCourseList, getSelectedCourseList, selectCourses } from '@/api/course'; // eslint-disable-line
 
 export default {
   name: 'dashboard',
@@ -24,41 +25,16 @@ export default {
     };
   },
   created() {
-    this.courseList = [
-      {
-        day: 3,
-        teacher: '张三',
-        period: 7,
-        length: 2,
-        name: '数据结构',
-        room: '4-201'
-      },
-      {
-        day: 1,
-        period: 1,
-        length: 2,
-        name: '大学物理',
-        room: '4-201'
-      },
-      {
-        day: 2,
-        period: 7,
-        length: 2,
-        name: '程序设计',
-        room: '4-201'
-      },
-      {
-        day: 4,
-        period: 5,
-        length: 4,
-        name: '交通实验',
-        room: '理西201'
-      }
-    ];
+    this.initCourseList();
   },
   methods: {
     handleSelectCourseBtn() {
       this.$router.push('/courses');
+    },
+    initCourseList() {
+      getSelectedCourseList().then(res => {
+        this.courseList = res.data;
+      });
     }
   }
 };
