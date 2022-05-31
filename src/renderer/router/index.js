@@ -79,6 +79,20 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/courses',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '',
+        name: 'Courses',
+        component: () => import('@/views/courses/index'),
+        meta: { title: '选课', icon: 'courses' }
+      }
+    ]
+  },
+
+  {
     path: '/admin',
     name: 'Admin',
     hidden: true,

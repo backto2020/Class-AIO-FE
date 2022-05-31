@@ -54,7 +54,8 @@
           <div>
             上课时间：
             {{
-              selectedCourse.week +
+              '周' +
+                weekTable[selectedCourse.day - 1] +
                 ' ' +
                 '第' +
                 selectedCourse.period +

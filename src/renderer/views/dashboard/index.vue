@@ -4,6 +4,7 @@
     <div class="dashboard-text">学号：{{ sid }}</div>
     <div class="dashboard-text">用户名：{{ username }}</div>
     <course-table :usualCourses="courseList" :width="800" :height="600" />
+    <el-button @click="handleSelectCourseBtn">编辑选课</el-button>
   </el-card>
 </template>
 
@@ -26,7 +27,6 @@ export default {
     this.courseList = [
       {
         day: 3,
-        week: '周三',
         teacher: '张三',
         period: 7,
         length: 2,
@@ -49,13 +49,17 @@ export default {
       },
       {
         day: 4,
-        week: '周四',
         period: 5,
         length: 4,
         name: '交通实验',
         room: '理西201'
       }
     ];
+  },
+  methods: {
+    handleSelectCourseBtn() {
+      this.$router.push('/courses');
+    }
   }
 };
 </script>
