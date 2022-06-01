@@ -40,7 +40,9 @@
                 backgroundColor: colorArrays[index % 9]
               }"
             >
-              <div class="small-text">{{ item.name + '@' + item.room }}</div>
+              <div class="small-text">
+                {{ item.room ? item.name + '@' + item.room : item.name }}
+              </div>
             </div>
           </div>
         </div>
@@ -64,8 +66,8 @@
                 '节'
             }}
           </div>
-          <div>上课教师： {{ selectedCourse.teacher }}</div>
-          <div>上课地点： {{ selectedCourse.room }}</div>
+          <div v-if="selectedCourse.teacher">上课教师： {{ selectedCourse.teacher }}</div>
+          <div v-if="selectedCourse.room">上课地点： {{ selectedCourse.room }}</div>
         </div>
         <div v-else class="tip">本学期没有课哦</div>
       </div>
