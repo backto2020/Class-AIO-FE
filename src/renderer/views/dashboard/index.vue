@@ -11,7 +11,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import CourseTable from './components/CourseTable.vue';
-import { getAllCourseList, getSelectedCourseList, selectCourses } from '@/api/course'; // eslint-disable-line
+import { getSelectedCourseList } from '@/api/course';
 
 export default {
   name: 'dashboard',
